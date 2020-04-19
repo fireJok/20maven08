@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.db</groupId>
+  <artifactId>20maven08--exerciseParent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+   <servlet-version>3.0.1</servlet-version>
+  	<jsp-version>2.2</jsp-version>
+  	<jstl-version>1.2</jstl-version>
+  	<spring-version>5.2.3.RELEASE</spring-version>
+  	<aspectjweaver-version>1.8.6</aspectjweaver-version>
+  	<mybatis-version>3.5.4</mybatis-version>
+  	<mybatis-spring-version>2.0.4</mybatis-spring-version>
+  	<log4j-version>1.2.17</log4j-version>
+  	<mysql-connector-java-version>8.0.11</mysql-connector-java-version>
+  	<jackson-version>2.9.8</jackson-version>
+  	<commons-fileupload-version>1.4</commons-fileupload-version>
+  	<commons-io-version>2.6</commons-io-version>
+  </properties>
+  <dependencyManagement>
+  <dependencies>
+  	<dependency>
+	  	<groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>${servlet-version}</version>
+	   <scope>provided</scope>
+  	</dependency>
+  	<dependency>
+	  	<groupId>javax.servlet.jsp</groupId>
+	    <artifactId>jsp-api</artifactId>
+	    <version>${jsp-version}</version>
+	   <scope>provided</scope>
+  	</dependency>
+  	<dependency>
+	  	<groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>${jstl-version}</version>
+  	</dependency>
+  	<!-- spring依赖包 -->
+  	<dependency>
+	  	<groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${spring-version}</version>	   
+  	</dependency>
+  		<dependency>
+	  	<groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>${spring-version}</version>	   
+  	</dependency>
+  		<dependency>
+	  	<groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>${aspectjweaver-version}</version>	   
+  	</dependency>
+  	<!-- mabatis依赖包 -->
+  	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>${mybatis-version}</version>	   
+  	</dependency>
+  	<!-- mabatis整合spring依赖包 -->
+  	<dependency>
+	  	<groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+	    <version>${mybatis-spring-version}</version>	   
+  	</dependency>
+  	<!-- 日志包 -->
+  	<dependency>
+	  	<groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>${log4j-version}</version>	   
+  	</dependency>
+  	<!-- mysql驱动包 -->
+  	<dependency>
+	  	<groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>${mysql-connector-java-version}</version>	   
+  	</dependency>
+  	<!-- jackson依赖包 -->
+  	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>${jackson-version}</version>
+   </dependency>
+   <dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-annotations</artifactId>
+	    <version>2.9.0</version>
+  </dependency>
+  	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.9.8</version>
+	</dependency>
+  
+   
+  	<!-- 文件上传下载依赖包 -->
+  	<dependency>
+	  	<groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>${commons-fileupload-version}</version>	   
+  	</dependency>
+  	<dependency>
+	  	<groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>${commons-io-version}</version>	   
+  	</dependency>
+  </dependencies>
+  </dependencyManagement>
+  <!-- build里面的配置表示当前项目发布到下面的tomcat中，而不是本地tomcat中 -->
+   <build>
+   <resources>
+   	<resource>
+   		<directory>src/main/java</directory>
+   		<includes>
+   			<include>**/*.xml</include>
+   		</includes>
+   	</resource>
+   	<resource>
+   		<directory>src/main/resources</directory>
+   		<includes>
+	   		<include>**/*.xml</include>
+	   		<include>**/*.properties</include>
+  		</includes>
+   	</resource>
+   </resources>
+   <pluginManagement><!-- 被该标签包含的内容有可能会被子项目引用 -->
+  	<plugins>
+  		<plugin>
+  				<groupId>org.apache.tomcat.maven</groupId>
+			    <artifactId>tomcat7-maven-plugin</artifactId>
+			    <version>2.2</version>
+			    <configuration>
+			    <!-- 控制tomcat端口号 -->			    	
+			    	<port>80</port>
+			    	<!-- 
+			    	项目发布到tomcat后的名称 
+			    	/表示项目发布后名称为ROOT
+			    	/abc表示项目发布后名称为abc
+			    	 -->
+			    	<path>/abc</path>
+			    	<!-- 热部署所需 ,如果不需要部署则不用写。
+			    	远程服务器的用户名为tomcat
+			    	密码为tomcat-->
+			    	<username>tomcat</username>
+			    	<password>tomcat</password>
+			    	<url>http://192.168.225.129:8080/manager/text</url>
+			    	
+			    </configuration>
+  		</plugin>
+  	</plugins>
+  	</pluginManagement>
+  </build> 
+   <modules>
+   	<module>20maven08-exercisechild01</module>
+   	<module>20maven08--exercisechild02</module>
+   	<module>20maven08--exercisePoji</module>
+   </modules>
+</project>

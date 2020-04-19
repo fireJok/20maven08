@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.db</groupId>
+    <artifactId>20maven08--exerciseParent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>20maven08-exercisechild01</artifactId>
+  <packaging>war</packaging>
+  <properties>
+  	<webVersion>3.1</webVersion>
+  </properties>
+  
+ <dependencies>
+ 
+  	<dependency>
+	  	<groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	   <scope>provided</scope>
+  	</dependency>
+  	<dependency>
+	  	<groupId>javax.servlet.jsp</groupId>
+	    <artifactId>jsp-api</artifactId>
+	   <scope>provided</scope>
+  	</dependency>
+  	<dependency>
+	  	<groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+  	</dependency>
+  	<!-- spring依赖包 -->
+  	<dependency>
+	  	<groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+  	</dependency>
+  		<dependency>
+	  	<groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+  	</dependency>
+  		<dependency>
+	  	<groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+  	</dependency>
+  	<!-- mabatis依赖包 -->
+  	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+  	</dependency>
+  	<!-- mabatis整合spring依赖包 -->
+  	<dependency>
+	  	<groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+  	</dependency>
+  	<!-- 日志包 -->
+  	<dependency>
+	  	<groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+  	</dependency>
+  	<!-- mysql驱动包 -->
+  	<dependency>
+	  	<groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+  	</dependency>
+  	<!-- jackson依赖包 -->
+  	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+   </dependency>
+   <dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-annotations</artifactId>
+  </dependency>
+  	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	</dependency>  
+  	<!-- 文件上传下载依赖包 -->
+  	<dependency>
+	  	<groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+  	</dependency>
+  	<dependency>
+	  	<groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+  	</dependency>
+  </dependencies>
+  <build>
+   <plugins>
+  		<plugin>
+  				<groupId>org.apache.tomcat.maven</groupId>
+			    <artifactId>tomcat7-maven-plugin</artifactId>
+			    <version>2.2</version>
+			    <configuration>
+			    <!-- 控制tomcat端口号 -->			    	
+			    	<port>80</port>
+			    	<!-- 
+			    	项目发布到tomcat后的名称 
+			    	/表示项目发布后名称为ROOT
+			    	/abc表示项目发布后名称为abc
+			    	 -->
+			    	<path>/abc</path>
+			    	
+			    </configuration>
+  		</plugin>
+  	</plugins>
+   </build>
+</project>

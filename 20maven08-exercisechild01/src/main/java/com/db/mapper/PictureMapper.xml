@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.PictureMapper">
+	<insert id="inspic" parameterType="Picture">
+	insert into picture values(default,#{path})
+	</insert>
+	<select id="selall" resultType="Picture">
+	select * from picture;
+	</select>
+	<delete id="delbyid" parameterType="Picture">
+	delete from picture where id=#{id};
+	</delete>
+</mapper>

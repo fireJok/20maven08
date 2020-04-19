@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+      xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans
+     				https://www.springframework.org/schema/beans/spring-beans.xsd
+			       http://www.springframework.org/schema/context
+			       https://www.springframework.org/schema/context/spring-context.xsd
+			       http://www.springframework.org/schema/mvc
+        		 https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- 扫描注解 -->
+	<context:component-scan base-package="com.db.controller"></context:component-scan>
+	<!-- 
+	相当于配置了<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+	 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 
+	因为我们在web.xml中配置了<url-pattern>/</url-pattern>
+	这个就表示出了jsp文件能正常访问，其他类型的文件都会去访问controller
+	但有些静态资源比如js、图片等就无法正常访问，所以需要对这些静态资源单独处理
+	如下：
+	mapping="/js/**":表示只要访问路径是js文件夹下的问价，都会去location="/js/"（即js文件夹）下面
+	去找，而不会访问controller
+	 -->
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/files/" mapping="/files/**"></mvc:resources>
+	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	<!-- 自定义视图解析器 -->
+	<bean id="" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 前缀 -->
+		<property name="prefix" value="/"></property>
+		<!-- 后缀 -->
+		<property name="suffix" value=""></property>
+	</bean>
+	<!-- 配置MultipartResovler解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		
+	</bean>
+	<!--异常解析器； 下面是设置当上传文件时出现什么异常之后可以跳转到某个对应的页面 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+			<!-- 当出现 MaxUploadSizeExceededException上传文件大小不符合要求时会跳转到error.jsp页面-->
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">/error.jsp</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 拦截器配置 ,这种是选择性的过滤，只过滤path中指定的
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/demo1"/>
+			<mvc:mapping path="/demo2"/>
+			<bean class="com.db.interceptor.DemoInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	-->
+	<!-- 拦截器设置，过滤所有 -->
+	<!-- <mvc:interceptors>		
+			<bean class="com.db.interceptor.DemoInterceptor"></bean>
+	</mvc:interceptors> -->
+</beans>
